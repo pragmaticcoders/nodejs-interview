@@ -1,6 +1,7 @@
 import { knex as buildKnex } from "knex";
 import { AppConfig, getAppConfig } from "app/config";
 import logger from "app/utils/logger";
+import { SkillsStorage } from "app/storages/SkillsStorage";
 
 export type AppServices = {
   appConfig: AppConfig;
@@ -29,9 +30,11 @@ export const stopStorages = async (storages: Storages) => {
 
 export const createStorages = (appConfig: AppConfig) => {
   const knex = buildKnex(appConfig.dbConfig);
+  const skillsStorage = new SkillsStorage(knex);
 
   return {
     knex,
+    skillsStorage
   };
 };
 

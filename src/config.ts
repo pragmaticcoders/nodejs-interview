@@ -27,7 +27,7 @@ export async function getAppConfig() {
 export function getDbConfig(): Knex.Config {
   return {
     client: "pg",
-    connection: "postgres://postgres@localhost:5434/nodejs_interview_dev_local",
+    connection: `postgres://${process.env.PGUSER}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE_TEST}`,
     migrations: {
       directory: join(__dirname, "./migrations"),
       loadExtensions: [".ts"],
