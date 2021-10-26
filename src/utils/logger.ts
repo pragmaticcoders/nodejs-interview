@@ -3,7 +3,6 @@ import { Format } from "logform";
 
 const env = process.env.ENVIRONMENT || "local";
 const appVersion = process.env.APP_VERSION || "no-version-env";
-const lambdaName = process.env.LAMBDA_NAME || "lambda";
 const level = process.env.LOG_LEVEL || "info";
 
 export function createDefaultLogger(): Logger {
@@ -31,7 +30,6 @@ function createEnvFormat(): Format {
     transform: logObj => {
       logObj.environment = env;
       logObj.appVersion = appVersion;
-      logObj.lambdaName = lambdaName;
       return logObj;
     },
   };
