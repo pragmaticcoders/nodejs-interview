@@ -6,7 +6,7 @@ export const healthCheckController = (app: AppServices) => {
   return async (req: Request<{}, {}, {}, {}>, res: Response<{}>) => {
     let dbError;
     try {
-      await app.storages.knex.raw(`SELECT 1;`);
+      await app.storages.knex?.raw(`SELECT 1;`);
     } catch (e) {
       dbError = e.message;
       logger.error("Health check db connection error", { dbError: e.message });
@@ -14,6 +14,7 @@ export const healthCheckController = (app: AppServices) => {
     const data = {
       env: app.appConfig.environment,
       db: {
+        useMocks: app.appConfig.useDbMock,
         isOk: !dbError,
         error: dbError,
       },

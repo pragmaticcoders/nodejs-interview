@@ -14,17 +14,25 @@ export type AppConfig = AsyncReturnType<typeof getAppConfig>;
 
 export async function getAppConfig() {
   const envReader = createEnvReader(process.env);
-  const { readRequiredString } = envReader;
+  const { readRequiredString, readOptionalBool } = envReader;
 
   const environment = readRequiredString("ENVIRONMENT") as Environment;
 
+  const useDbMock = readOptionalBool("USE_DB_MOCK", false);
   return {
     environment,
-    dbConfig: await getDbConfig(),
+    useDbMock,
+    dbConfig: await getDbConfig(useDbMock),
   };
 }
 
-export function getDbConfig(): Knex.Config {
+function getDbConfig(useMock: boolean): Knex.Config {
+  if (useMock) {
+    return {
+      client: "mock",
+    };
+  }
+
   return {
     client: "pg",
     connection: `postgres://${process.env.PGUSER}@${process.env.PGHOST}:${process.env.PGPORT}/${process.env.PGDATABASE_TEST}`,
