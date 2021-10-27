@@ -17,14 +17,11 @@ Project can contain a few "not the best" solutions that can be pointed out by th
 - run docker with postgres `npm run start:services` keep it running in separate terminal
 - run tests `npm run test`
 
-## exercises
-
-### 1. add tests for 'create-skill.ts'
-### 2. add delete skill API, along with tests
-### 3. add update skill API, along with tests
-### 4. add author nick to skill schema
-
 ## notes
 
 - You can switch to use storage mocks in `.env` file: `USE_DB_MOCK=true`
 - tests should pass for integration tests with dockerized database and also with mocked storages
+
+## troubleshooting
+
+- in case of error related to installing dependencies install `libpq` (on mac: `brew install libpq`)
