@@ -27,7 +27,6 @@
     "express": "^4.17.1",
     "knex": "^0.95.11",
     "pg": "^8.7.1",
-    "pg-native": "^3.0.0",
     "ramda": "^0.27.1",
     "reflect-metadata": "^0.1.13",
     "request": "^2.88.2",
